@@ -1,6 +1,6 @@
 import { useApp } from '../../context/AppContext.jsx';
 import { STATUS_CONFIG } from '../../data/mockData.js';
-import { ArrowLeft, Users, CheckCircle2, AlertTriangle, ChevronDown, ChevronRight, FileText, MessageSquare, ClipboardList, Shield, Send, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Users, CheckCircle2, AlertTriangle, ChevronDown, ChevronRight, FileText, MessageSquare, ClipboardList, Shield, Send, ExternalLink } from 'lucide-react';
 import { useState, useCallback, useEffect } from 'react';
 import './FileReview.css';
 
@@ -463,6 +463,8 @@ export default function FileReview() {
   const [showEscalationModal, setShowEscalationModal] = useState(null);
   const [showFlagModal, setShowFlagModal] = useState(null);
   const [highlightedDoc, setHighlightedDoc] = useState(null);
+  const [showReturnModal, setShowReturnModal] = useState(false);
+  const [returnNote, setReturnNote] = useState('');
 
   if (!client) return null;
 
@@ -539,8 +541,21 @@ export default function FileReview() {
       dispatch({ type: 'START_ROW_EXIT', fileId: client.id });
       setTimeout(() => dispatch({ type: 'COMPLETE_ROW_EXIT', fileId: client.id }), 450);
     } else if (actions.right?.label?.includes('Follow-up')) {
-      setRightPanelExpanded(true);
-      setRightTab('comms');
+      // Send a follow-up message and remove from queue
+      dispatch({
+        type: 'ADD_COMM',
+        fileId: client.id,
+        comm: {
+          id: `c-${Date.now()}`,
+          from: 'Victoria Rukaite',
+          type: 'outbound',
+          date: new Date().toISOString(),
+          text: 'Hi — just checking in on document gathering. Please let us know if you need any help with the outstanding items.',
+        },
+      });
+      dispatch({ type: 'CLOSE_FILE' });
+      dispatch({ type: 'START_ROW_EXIT', fileId: client.id });
+      setTimeout(() => dispatch({ type: 'COMPLETE_ROW_EXIT', fileId: client.id }), 450);
     }
   };
 
@@ -618,7 +633,7 @@ export default function FileReview() {
                 setTimeout(() => setHighlightedDoc(null), 1500);
               }}
             />
-            <Checklist client={client} collapsed={allChecksPassed} />
+            <Checklist client={client} collapsed={true} />
             <FileInfo client={client} />
 
             {/* Staged flags */}
@@ -637,8 +652,20 @@ export default function FileReview() {
               </div>
             )}
 
+            {/* Attorney actions when viewing full file */}
+            {isAttorney && (
+              <div className="fr-primary-actions">
+                <button className="btn btn--outline" onClick={() => { setRightPanelExpanded(true); setRightTab('comms'); }}>
+                  Message Client
+                </button>
+                <button className="btn btn--primary" onClick={() => setShowReturnModal(true)}>
+                  Return to CM <ArrowRight size={14} />
+                </button>
+              </div>
+            )}
+
             {/* Primary actions — hidden for attorney read-only view */}
-            {(actions.left || actions.right) && (
+            {!isAttorney && (actions.left || actions.right) && (
               <div className="fr-primary-actions">
                 {actions.left && (
                   <button className={`btn ${actions.left.style}`} onClick={() => {
@@ -708,6 +735,26 @@ export default function FileReview() {
           onClose={() => setShowFlagModal(null)}
           onStage={handleStageFlag}
         />
+      )}
+      {showReturnModal && (
+        <div className="fr-modal-overlay modal-overlay" onClick={() => setShowReturnModal(false)}>
+          <div className="fr-modal fr-modal--wide modal-content" onClick={e => e.stopPropagation()}>
+            <h3 className="fr-modal__title">Return to Case Manager</h3>
+            <p className="fr-modal__desc">This file (<strong>{displayName}</strong>) will be returned to the assigned CM with your determination.</p>
+            <label className="fr-modal__label">Attorney determination <span style={{ color: 'var(--error)' }}>*</span></label>
+            <textarea className="fr-modal__textarea" value={returnNote} onChange={e => setReturnNote(e.target.value)} rows={4} placeholder='e.g. "Proceed — adoption exemption applies under Section 5.1"' />
+            <div className="fr-modal__actions">
+              <button className="btn btn--outline" onClick={() => setShowReturnModal(false)}>Cancel</button>
+              <button className="btn btn--primary" disabled={!returnNote.trim()} onClick={() => {
+                dispatch({ type: 'RETURN_TO_CM', fileId: client.id, determination: returnNote });
+                setShowReturnModal(false);
+                dispatch({ type: 'CLOSE_FILE' });
+              }}>
+                Return to CM <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

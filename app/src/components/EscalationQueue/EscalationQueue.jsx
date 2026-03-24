@@ -1,16 +1,53 @@
 import { useApp } from '../../context/AppContext.jsx';
 import { ArrowRight, Gavel } from 'lucide-react';
+import { useState } from 'react';
 import './EscalationQueue.css';
+
+// ─── RETURN TO CM MODAL ───
+function ReturnModal({ client, onClose, onConfirm }) {
+  const [determination, setDetermination] = useState('');
+  const displayName = client.displayName || client.name;
+
+  return (
+    <div className="fr-modal-overlay modal-overlay" onClick={onClose}>
+      <div className="esc-return-modal modal-content" onClick={e => e.stopPropagation()}>
+        <h3 className="esc-return-modal__title">Return to Case Manager</h3>
+        <p className="esc-return-modal__desc">
+          This file (<strong>{displayName}</strong>) will be returned to the assigned CM with your determination attached.
+        </p>
+        <label className="esc-return-modal__label">
+          Attorney determination <span style={{ color: 'var(--error)' }}>*</span>
+        </label>
+        <textarea
+          className="esc-return-modal__textarea"
+          value={determination}
+          onChange={e => setDetermination(e.target.value)}
+          rows={4}
+          placeholder='e.g. "Proceed — adoption exemption applies under Section 5.1"'
+        />
+        <div className="esc-return-modal__actions">
+          <button className="btn btn--outline" onClick={onClose}>Cancel</button>
+          <button
+            className="btn btn--primary"
+            disabled={!determination.trim()}
+            onClick={() => onConfirm(determination)}
+          >
+            Return to CM <ArrowRight size={14} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function EscalationQueue() {
   const { state, dispatch, getClient } = useApp();
   const escalations = state.attorneyEscalations || [];
+  const [returnModalClient, setReturnModalClient] = useState(null);
 
-  const handleReturn = (clientId) => {
-    const determination = prompt('Enter attorney determination (e.g. "Proceed — adoption exemption applies"):');
-    if (determination) {
-      dispatch({ type: 'RETURN_TO_CM', fileId: clientId, determination });
-    }
+  const handleReturnConfirm = (determination) => {
+    dispatch({ type: 'RETURN_TO_CM', fileId: returnModalClient.id, determination });
+    setReturnModalClient(null);
   };
 
   return (
@@ -68,7 +105,7 @@ export default function EscalationQueue() {
                 <button className="btn btn--outline" onClick={() => dispatch({ type: 'OPEN_FILE', fileId: esc.clientId })}>
                   View Full File
                 </button>
-                <button className="btn btn--primary" onClick={() => handleReturn(esc.clientId)}>
+                <button className="btn btn--primary" onClick={() => setReturnModalClient(client)}>
                   Return to CM <ArrowRight size={14} />
                 </button>
               </div>
@@ -76,6 +113,15 @@ export default function EscalationQueue() {
           );
         })}
       </div>
+
+      {/* Return to CM Modal */}
+      {returnModalClient && (
+        <ReturnModal
+          client={returnModalClient}
+          onClose={() => setReturnModalClient(null)}
+          onConfirm={handleReturnConfirm}
+        />
+      )}
     </div>
   );
 }

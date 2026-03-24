@@ -35,8 +35,12 @@ function buildFreshState() {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'SET_ROLE':
-      return { ...state, currentRole: action.role, currentView: action.role === 'olivia' ? 'escalations' : 'queue', selectedFileId: null };
+    case 'SET_ROLE': {
+      let view = 'queue';
+      if (action.role === 'olivia') view = 'escalations';
+      else if (action.role === 'tereza') view = 'team';
+      return { ...state, currentRole: action.role, currentView: view, selectedFileId: null };
+    }
     
     case 'SET_VIEW':
       return { ...state, currentView: action.view, selectedFileId: null };

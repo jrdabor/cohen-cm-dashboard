@@ -94,32 +94,7 @@ export default function CockpitStrip() {
         </div>
       </div>
 
-      {/* Cluster 2: Needs Me */}
-      <div className="cockpit__cluster cockpit__needs-me">
-        {counts.review > 0 && (
-          <button className="cockpit__badge" onClick={() => dispatch({ type: 'SET_QUEUE_FILTER', filter: 'review' })}>
-            {counts.review} review
-          </button>
-        )}
-        {counts.resub > 0 && (
-          <button className="cockpit__badge cockpit__badge--accent" onClick={() => dispatch({ type: 'SET_QUEUE_FILTER', filter: 'resubmitted' })}>
-            {counts.resub} re-sub
-          </button>
-        )}
-        {counts.hold > 0 && (
-          <button className="cockpit__badge cockpit__badge--warn" onClick={() => dispatch({ type: 'SET_QUEUE_FILTER', filter: 'holds' })}>
-            {counts.hold} hold
-          </button>
-        )}
-        {counts.postSub > 0 && (
-          <button className="cockpit__badge" onClick={() => dispatch({ type: 'SET_QUEUE_FILTER', filter: 'post-sub' })}>
-            {counts.postSub} post-sub
-          </button>
-        )}
-        {counts.review + counts.resub + counts.hold + counts.postSub === 0 && (
-          <span className="cockpit__all-clear">All clear ✓</span>
-        )}
-      </div>
+
 
       {/* Cluster 3: Watch */}
       <div className="cockpit__cluster cockpit__watch">
