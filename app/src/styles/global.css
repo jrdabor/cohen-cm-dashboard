@@ -1,0 +1,244 @@
+/* ─── IMPORTS ─── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&display=swap');
+@import './tokens.css';
+@import './animations.css';
+
+/* ─── RESET ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; }
+input, textarea, select { font-family: inherit; font-size: inherit; }
+ul, ol { list-style: none; }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-mut);
+}
+
+/* ─── UTILITY CLASSES ─── */
+.section-label {
+  font-size: var(--fs-section);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-mut);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+}
+
+.display-font {
+  font-family: var(--font-display);
+}
+
+/* ─── STATUS PILLS ─── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.status-pill--gray       { background: #E8E8E4; color: var(--text-sec); }
+.status-pill--gray-muted { background: #F0F0EC; color: var(--text-mut); }
+.status-pill--accent     { background: var(--accent); color: white; }
+.status-pill--success    { background: var(--success); color: white; }
+.status-pill--amber      { background: var(--warn); color: white; }
+.status-pill--red        { background: var(--error); color: white; }
+.status-pill--blue       { background: var(--blue); color: white; }
+.status-pill--red-outline {
+  background: white;
+  color: var(--error);
+  border: 1.5px solid var(--error);
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  border: 1.5px solid transparent;
+  transition: all var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: white;
+}
+.btn--primary:hover {
+  background: var(--accent-mid);
+}
+
+.btn--success {
+  background: var(--success);
+  color: white;
+}
+.btn--success:hover {
+  background: #158B3D;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn--outline:hover {
+  background: var(--bg-deep);
+  border-color: var(--text-mut);
+}
+
+.btn--warn-outline {
+  background: transparent;
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.btn--warn-outline:hover {
+  background: var(--warn-bg);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-sec);
+  padding: 6px 10px;
+}
+.btn--ghost:hover {
+  background: var(--bg-deep);
+  color: var(--text);
+}
+
+.btn--sm {
+  padding: 5px 12px;
+  font-size: var(--fs-small);
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── FILTER PILLS ─── */
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text-sec);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.filter-pill:hover {
+  border-color: var(--accent-mid);
+  color: var(--accent);
+}
+
+.filter-pill--active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* ─── BADGE ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge--family {
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+.badge--new {
+  background: var(--accent-pale);
+  color: var(--accent);
+}
+
+.badge--resolved {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(26, 125, 70, 0.15);
+}
+
+/* ─── SOURCE BADGES (Forms tab) ─── */
+.source-badge {
+  display: inline-flex;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 10.5px;
+  font-weight: var(--fw-medium);
+}
+
+.source-badge--doc   { background: var(--success-bg); color: var(--success); }
+.source-badge--input { background: var(--blue-bg); color: var(--blue); }
+.source-badge--cm    { background: var(--warn-bg); color: var(--warn); }
+.source-badge--default { background: #F0F0EC; color: var(--text-mut); }

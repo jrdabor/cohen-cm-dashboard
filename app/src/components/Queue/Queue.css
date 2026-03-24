@@ -1,0 +1,143 @@
+.queue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-base);
+}
+
+/* ─── FILTERS ─── */
+.queue__filters {
+  display: flex;
+  gap: var(--sp-sm);
+  flex-wrap: wrap;
+}
+
+/* ─── BATCH ─── */
+.queue__batch {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ─── LIST ─── */
+.queue__list {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ─── ROW ─── */
+.queue-row {
+  display: flex;
+  align-items: stretch;
+  min-height: var(--queue-row-h);
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+  position: relative;
+}
+
+.queue-row:last-child {
+  border-bottom: none;
+}
+
+.queue-row:hover {
+  background: var(--bg);
+}
+
+/* Priority bar */
+.queue-row__priority {
+  width: 6px;
+  min-height: 100%;
+  flex-shrink: 0;
+}
+
+/* Content */
+.queue-row__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--sp-md) var(--sp-base) var(--sp-md) var(--sp-md);
+  gap: var(--sp-base);
+  min-width: 0;
+}
+
+.queue-row__left {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  flex-shrink: 0;
+  min-width: 180px;
+}
+
+.queue-row__name {
+  font-weight: var(--fw-semibold);
+  font-size: 15px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.queue-row__center {
+  flex: 1;
+  min-width: 0;
+}
+
+.queue-row__summary {
+  font-size: 14px;
+  font-weight: var(--fw-regular);
+  color: var(--text-sec);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.queue-row__right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  flex-shrink: 0;
+}
+
+.queue-row__time {
+  font-size: 12.5px;
+  color: var(--text-mut);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  min-width: 32px;
+  text-align: right;
+}
+
+.queue-row__time--warn {
+  color: var(--warn);
+}
+
+/* Quick action button */
+.queue-row__quick-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--dur-fast) var(--ease-out);
+  animation: fadeIn 150ms var(--ease-out);
+}
+
+.queue-row__quick-action:hover {
+  background: var(--accent-mid);
+}
+
+/* ─── EMPTY ─── */
+.queue__empty {
+  padding: var(--sp-3xl);
+  text-align: center;
+  color: var(--text-mut);
+}

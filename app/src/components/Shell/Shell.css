@@ -1,0 +1,231 @@
+/* ─── HEADER ─── */
+.shell-header {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-xl);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.shell-header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-lg);
+}
+
+.shell-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+/* ─── LOGO ─── */
+.shell-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+.shell-logo__mark {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: 18px;
+  border-radius: var(--radius-md);
+}
+
+.shell-logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.shell-logo__firm {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.shell-logo__product {
+  font-size: 11.5px;
+  color: var(--text-mut);
+  letter-spacing: 0.02em;
+}
+
+/* ─── RESET ─── */
+.shell-reset {
+  font-size: 12.5px !important;
+  color: var(--text-mut) !important;
+}
+
+/* ─── ROLE SWITCHER ─── */
+.shell-role-switcher {
+  position: relative;
+}
+
+.shell-role-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: 6px 10px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.shell-role-btn:hover {
+  background: var(--bg);
+  border-color: var(--border);
+}
+
+.shell-role-avatar {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--accent-pale);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+}
+
+.shell-role-avatar--sm {
+  width: 26px;
+  height: 26px;
+  font-size: 10px;
+}
+
+.shell-role-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.shell-role-name {
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  color: var(--text);
+}
+
+.shell-role-subtitle {
+  font-size: 11px;
+  color: var(--text-mut);
+}
+
+.shell-role-chevron {
+  color: var(--text-mut);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.shell-role-chevron.open {
+  transform: rotate(180deg);
+}
+
+.shell-role-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 240px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  padding: 4px;
+  animation: modalContentIn 150ms var(--ease-out) forwards;
+}
+
+.shell-role-option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.shell-role-option:hover {
+  background: var(--bg);
+}
+
+.shell-role-option.active {
+  background: var(--accent-pale);
+}
+
+.shell-role-option__name {
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  color: var(--text);
+}
+
+.shell-role-option__subtitle {
+  font-size: 11px;
+  color: var(--text-mut);
+}
+
+/* ─── NAV TABS ─── */
+.shell-nav {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 var(--sp-xl);
+}
+
+.shell-nav__tabs {
+  display: flex;
+  gap: 0;
+}
+
+.shell-nav__tab {
+  padding: 11px 20px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  color: var(--text-sec);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+  position: relative;
+}
+
+.shell-nav__tab:hover {
+  color: var(--text);
+}
+
+.shell-nav__tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ─── CONTENT ─── */
+.shell-content {
+  flex: 1;
+  padding: var(--sp-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}

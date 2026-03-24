@@ -1,0 +1,85 @@
+/* ─── COLOR TOKENS ─── */
+:root {
+  /* Core surfaces */
+  --bg:            #F6F5F0;
+  --bg-deep:       #EDECEA;
+  --card:          #FFFFFF;
+  --border:        #E0DED8;
+  --border-light:  #EEEDE8;
+
+  /* Accent — forest green */
+  --accent:        #1B3A2D;
+  --accent-mid:    #2D5F45;
+  --accent-light:  #3A7D5C;
+  --accent-pale:   #E2F0E8;
+
+  /* Signal */
+  --success:       #1A7D46;
+  --success-bg:    #E6F5ED;
+  --warn:          #B45309;
+  --warn-bg:       #FEF7E6;
+  --error:         #C41E3A;
+  --error-bg:      #FDE8EC;
+  --blue:          #1E56A0;
+  --blue-bg:       #E8F0FA;
+
+  /* Text */
+  --text:          #1C1C1A;
+  --text-sec:      #5C5C56;
+  --text-mut:      #9C9C94;
+
+  /* ─── TYPOGRAPHY ─── */
+  --font-display:  'Fraunces', Georgia, serif;
+  --font-body:     'DM Sans', system-ui, sans-serif;
+  --font-mono:     'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Type scale */
+  --fs-page-title: 30px;
+  --fs-ai-brief:   15.5px;
+  --fs-section:    11.5px;
+  --fs-body:       14px;
+  --fs-small:      12.5px;
+  --fs-mono:       13px;
+
+  /* Weights */
+  --fw-regular:    400;
+  --fw-medium:     500;
+  --fw-semibold:   600;
+  --fw-bold:       700;
+
+  /* ─── SPACING ─── */
+  --sp-xs:   4px;
+  --sp-sm:   8px;
+  --sp-md:   12px;
+  --sp-base: 16px;
+  --sp-lg:   20px;
+  --sp-xl:   24px;
+  --sp-2xl:  32px;
+  --sp-3xl:  40px;
+  --sp-4xl:  48px;
+
+  /* ─── RADII ─── */
+  --radius-sm:  4px;
+  --radius-md:  6px;
+  --radius-lg:  8px;
+  --radius-pill: 100px;
+
+  /* ─── SHADOWS ─── */
+  --shadow-sm:    0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:    0 2px 6px rgba(0,0,0,0.06);
+  --shadow-panel: 2px 0 8px rgba(0,0,0,0.04);
+  --shadow-modal: 0 8px 32px rgba(0,0,0,0.12);
+
+  /* ─── TRANSITIONS ─── */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:  150ms;
+  --dur-std:   250ms;
+  --dur-slow:  350ms;
+
+  /* ─── LAYOUT ─── */
+  --header-h:    56px;
+  --nav-h:       44px;
+  --cockpit-h:   52px;
+  --queue-row-h: 56px;
+}

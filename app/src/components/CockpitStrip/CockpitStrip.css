@@ -1,0 +1,112 @@
+.cockpit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px var(--sp-xl);
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--border);
+  min-height: var(--cockpit-h);
+  margin-bottom: var(--sp-sm);
+}
+
+.cockpit__cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+/* ─── MY DAY ─── */
+.cockpit__my-day {
+  gap: var(--sp-md);
+}
+
+.cockpit__day-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cockpit__reviewed {
+  font-size: 13.5px;
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  display: inline-block;
+}
+
+.cockpit__streak {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-mut);
+}
+
+/* ─── NEEDS ME ─── */
+.cockpit__needs-me {
+  gap: var(--sp-sm);
+}
+
+.cockpit__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: var(--fw-medium);
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-sec);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.cockpit__badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-pale);
+}
+
+.cockpit__badge--accent {
+  border-color: var(--warn);
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.cockpit__badge--warn {
+  border-color: var(--warn);
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.cockpit__all-clear {
+  font-size: 12.5px;
+  color: var(--success);
+  font-weight: var(--fw-medium);
+}
+
+/* ─── WATCH ─── */
+.cockpit__watch {
+  gap: var(--sp-md);
+}
+
+.cockpit__alert {
+  font-size: 12.5px;
+  font-weight: var(--fw-medium);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cockpit__alert--error {
+  color: var(--error);
+}
+
+.cockpit__alert--info {
+  color: var(--text-mut);
+  cursor: default;
+}
+
+.cockpit__alert--follow {
+  color: var(--warn);
+}
