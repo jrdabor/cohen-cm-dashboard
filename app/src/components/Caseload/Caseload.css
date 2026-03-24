@@ -38,10 +38,10 @@
 .caseload__portfolio-item.active { border-color: var(--accent); background: var(--accent-pale); }
 
 .caseload__portfolio-swatch {
-  width: 28px;
   height: 8px;
   border-radius: var(--radius-pill);
   flex-shrink: 0;
+  transition: width var(--dur-fast) var(--ease-out);
 }
 
 .caseload__portfolio-label {
