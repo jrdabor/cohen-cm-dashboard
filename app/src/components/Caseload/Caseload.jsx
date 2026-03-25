@@ -146,7 +146,6 @@ export default function Caseload({ readOnly, cmName }) {
                 <tr key={client.id} onClick={() => !readOnly && dispatch({ type: 'OPEN_FILE', fileId: client.id })} className={readOnly ? '' : 'clickable'}>
                   <td className="caseload__client-cell">
                     <span className="caseload__client-name">{client.displayName || client.name}</span>
-                    {client.type === 'family' && <span className="badge badge--family" style={{ fontSize: 10 }}>Family · {client.familyCount}</span>}
                   </td>
                   <td><StatusPill state={client.state} /></td>
                   <td className="caseload__date">{client.fileOpened || '—'}</td>

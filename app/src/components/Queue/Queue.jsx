@@ -127,12 +127,6 @@ export default function Queue() {
 
               <div className="queue-row__content">
                 <div className="queue-row__left">
-                  {client.type === 'family' && (
-                    <span className="badge badge--family">
-                      <Users size={11} style={{ marginRight: 3 }} />
-                      Family · {client.familyCount}
-                    </span>
-                  )}
                   <span className="queue-row__name">{displayName}</span>
                 </div>
 
