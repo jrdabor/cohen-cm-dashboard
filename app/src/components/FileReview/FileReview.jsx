@@ -607,7 +607,6 @@ export default function FileReview() {
                 setTimeout(() => setHighlightedDoc(null), 1500);
               }}
             />
-            <FileInfo client={client} />
 
             {/* Staged flags */}
             {state.stagedFlags.length > 0 && (
@@ -624,6 +623,8 @@ export default function FileReview() {
                 </button>
               </div>
             )}
+
+            <FileInfo client={client} />
 
             {/* Attorney actions when viewing full file */}
             {isAttorney && (
