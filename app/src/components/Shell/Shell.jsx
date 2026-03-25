@@ -8,6 +8,8 @@ const ROLES = [
   { id: 'victoria', label: 'Victoria Rukaite', subtitle: 'Case Manager' },
   { id: 'tereza', label: 'Tereza Monkova', subtitle: 'Supervisor' },
   { id: 'olivia', label: 'Olivia Cohen', subtitle: 'Attorney' },
+  { id: 'meagan', label: 'Meagan C.', subtitle: 'Back Office' },
+  { id: 'jordan', label: 'Jordan Cain', subtitle: 'Admin' },
 ];
 
 const NAV_TABS = {
@@ -22,6 +24,12 @@ const NAV_TABS = {
   ],
   olivia: [
     { id: 'escalations', label: 'My Escalations' },
+  ],
+  meagan: [
+    { id: 'wip', label: 'Dashboard' },
+  ],
+  jordan: [
+    { id: 'wip', label: 'Dashboard' },
   ],
 };
 

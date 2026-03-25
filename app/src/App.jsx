@@ -24,6 +24,18 @@ function Dashboard() {
       {state.currentView === 'caseload' && <Caseload />}
       {state.currentView === 'team' && <TeamView />}
       {state.currentView === 'escalations' && <EscalationQueue />}
+      {state.currentView === 'wip' && (
+        <div style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          minHeight: '60vh', gap: '12px', color: 'var(--text-mut)', textAlign: 'center', padding: '40px'
+        }}>
+          <div style={{ fontSize: '48px' }}>🚧</div>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', color: 'var(--text)', fontWeight: 500 }}>Coming Soon</h2>
+          <p style={{ fontSize: '14px', maxWidth: '360px', lineHeight: 1.6 }}>
+            This view is currently under development. Switch to another role to explore the live prototype.
+          </p>
+        </div>
+      )}
     </Shell>
   );
 }

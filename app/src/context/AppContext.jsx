@@ -39,6 +39,7 @@ function reducer(state, action) {
       let view = 'queue';
       if (action.role === 'olivia') view = 'escalations';
       else if (action.role === 'tereza') view = 'team';
+      else if (action.role === 'meagan' || action.role === 'jordan') view = 'wip';
       return { ...state, currentRole: action.role, currentView: view, selectedFileId: null };
     }
     
