@@ -157,12 +157,6 @@
   gap: var(--sp-sm);
 }
 
-.fr-flag-card--resolved {
-  border-color: rgba(26, 125, 70, 0.2);
-  background: rgba(230, 245, 237, 0.3);
-  opacity: 0.85;
-}
-
 .fr-flag-card--confirmed {
   opacity: 0.5;
 }
@@ -206,13 +200,10 @@
 }
 
 /* ─── CHECKLIST ─── */
-.fr-checklist-toggle {
+.fr-checklist-bar {
   display: flex;
   align-items: center;
   gap: var(--sp-sm);
-  background: transparent;
-  border: none;
-  cursor: pointer;
   padding: 4px 0;
   color: var(--text-mut);
 }

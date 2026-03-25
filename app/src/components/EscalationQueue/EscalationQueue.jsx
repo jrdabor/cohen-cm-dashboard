@@ -102,11 +102,11 @@ export default function EscalationQueue() {
                 )}
               </div>
               <div className="esc-card__actions">
-                <button className="btn btn--outline" onClick={() => dispatch({ type: 'OPEN_FILE', fileId: esc.clientId })}>
-                  View Full File
+                <button className="btn btn--outline" onClick={() => setReturnModalClient(client)}>
+                  Return to CM
                 </button>
-                <button className="btn btn--primary" onClick={() => setReturnModalClient(client)}>
-                  Return to CM <ArrowRight size={14} />
+                <button className="btn btn--primary" onClick={() => dispatch({ type: 'OPEN_FILE', fileId: esc.clientId })}>
+                  View Full File <ArrowRight size={14} />
                 </button>
               </div>
             </div>

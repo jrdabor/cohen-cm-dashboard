@@ -65,15 +65,18 @@ function ActionItems({ client, onEscalate, onConvertFlag, onDismissFlag, isReadO
 
       {/* Previous resolved flags (re-review) */}
       {previousFlags.map(flag => (
-        <div key={flag.id} className={`fr-flag-card fr-flag-card--resolved ${flag.confirmed ? 'fr-flag-card--confirmed' : ''}`}>
+        <div key={flag.id} className={`fr-flag-card ${flag.confirmed ? 'fr-flag-card--confirmed' : ''}`}>
           <div className="fr-flag-card__header">
-            <span className="fr-flag-card__title">{flag.title}</span>
+            <div className="fr-flag-card__header-left">
+              <CheckCircle2 size={15} color="var(--success)" />
+              <span className="fr-flag-card__title">{flag.title}</span>
+            </div>
             <span className="badge badge--resolved">{flag.confirmed ? 'Confirmed' : 'Resolved'}</span>
           </div>
           <p className="fr-flag-card__desc">{flag.resolution}</p>
           {!flag.confirmed && !isReadOnly && (
             <div className="fr-flag-card__actions">
-              <button className="btn btn--success btn--sm" onClick={() => dispatch({ type: 'CONFIRM_RESOLVED_FLAG', fileId: client.id, flagId: flag.id })}>
+              <button className="btn btn--primary btn--sm" onClick={() => dispatch({ type: 'CONFIRM_RESOLVED_FLAG', fileId: client.id, flagId: flag.id })}>
                 Confirm Resolved
               </button>
               <button className="btn btn--outline btn--sm">Re-flag</button>
@@ -109,49 +112,19 @@ function ActionItems({ client, onEscalate, onConvertFlag, onDismissFlag, isReadO
   );
 }
 
-// ─── CHECKLIST ───
-function Checklist({ client, collapsed: initialCollapsed }) {
-  const [collapsed, setCollapsed] = useState(initialCollapsed);
+// ─── CHECKLIST (static bar) ───
+function Checklist({ client }) {
   const ck = client.checklist || { passed: 0, total: 0 };
   const allPassed = ck.passed === ck.total;
 
   return (
     <div className="fr-section">
-      <button className="fr-checklist-toggle" onClick={() => setCollapsed(!collapsed)}>
-        {collapsed ? <ChevronRight size={16} /> : <ChevronDown size={16} />}
+      <div className="fr-checklist-bar">
         <span className="section-label">GOLDEN CHECKLIST</span>
         <span className={`fr-checklist-count ${allPassed ? 'fr-checklist-count--pass' : ''}`}>
           {ck.passed}/{ck.total} PASSED
         </span>
-      </button>
-      {!collapsed && (
-        <div className="fr-checklist-body">
-          <div className="fr-checklist-section">
-            <div className="fr-checklist-section__title">Eligibility</div>
-            {['Not adopted', 'Chain of descent established', 'Not diplomat child', 'Pre-1977 auto-resolved', 'Section 8 auto-resolved', 'Deceased ancestor handled', 'Quebec pre-1994 handled'].map((item, i) => (
-              <div key={i} className="fr-checklist-item"><CheckCircle2 size={14} color="var(--success)" /><span>{item}</span></div>
-            ))}
-          </div>
-          <div className="fr-checklist-section">
-            <div className="fr-checklist-section__title">Documents</div>
-            {['All required docs uploaded', 'Document quality passed', 'Types correctly classified', 'Two ID types provided', 'IDs show name + DOB', 'Photo ID present', 'IDs not expired', 'Authenticity markers', 'Language verified'].map((item, i) => (
-              <div key={i} className="fr-checklist-item"><CheckCircle2 size={14} color="var(--success)" /><span>{item}</span></div>
-            ))}
-          </div>
-          <div className="fr-checklist-section">
-            <div className="fr-checklist-section__title">Cross-Document Consistency</div>
-            {['Name consistent', 'DOB consistent', 'Parent names matched', 'Reg numbers distinguished', 'Chain linkage verified'].map((item, i) => (
-              <div key={i} className="fr-checklist-item"><CheckCircle2 size={14} color="var(--success)" /><span>{item}</span></div>
-            ))}
-          </div>
-          <div className="fr-checklist-section">
-            <div className="fr-checklist-section__title">Form Accuracy</div>
-            {['CIT-0001 auto-filled', 'IMM 5476 synced', 'Contact info correct', 'Representative hard-coded'].map((item, i) => (
-              <div key={i} className="fr-checklist-item"><CheckCircle2 size={14} color="var(--success)" /><span>{item}</span></div>
-            ))}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -486,13 +459,13 @@ export default function FileReview() {
       case 'eligibility_hold':
         return { left: { label: 'Message Client', style: 'btn--outline' }, right: { label: 'Escalate to Attorney', style: 'btn--primary' } };
       case 'forms_received':
-        return { left: { label: 'Flag Issue', style: 'btn--warn-outline' }, right: { label: 'Confirm — Submit to IRCC', style: 'btn--success' } };
+        return { left: { label: 'Flag Issue', style: 'btn--warn-outline' }, right: { label: 'Confirm — Submit to IRCC', style: 'btn--primary' } };
       case 'aor_received':
         return { left: null, right: { label: 'Notify Client', style: 'btn--primary btn--full' } };
       case 'government_questions':
         return { left: { label: 'Message Client', style: 'btn--outline' }, right: { label: 'Escalate to Attorney', style: 'btn--primary' } };
       case 'application_approved_gov':
-        return { left: null, right: { label: 'Notify & Congratulate', style: 'btn--success btn--full' } };
+        return { left: null, right: { label: 'Notify & Congratulate', style: 'btn--primary btn--full' } };
       case 'awaiting_documents':
         return { left: null, right: { label: 'Send Follow-up', style: 'btn--primary btn--full' } };
       default:
@@ -507,7 +480,7 @@ export default function FileReview() {
           left: { label: 'Flag Client', style: 'btn--warn-outline' },
           right: {
             label: client.type === 'family' ? 'Approve Family ✓' : 'Approve ✓',
-            style: 'btn--success',
+            style: 'btn--primary',
           },
         };
     }
@@ -621,6 +594,7 @@ export default function FileReview() {
         <div className={`fr-left panel-transition ${showNarrowSidebar ? 'fr-left--wide' : ''}`}>
           <div className="fr-left__scroll">
             <AIBrief text={client.aiBrief || 'No brief available.'} />
+            <Checklist client={client} />
             <ActionItems
               client={client}
               onEscalate={(flag) => setShowEscalationModal({ flag })}
@@ -633,7 +607,6 @@ export default function FileReview() {
                 setTimeout(() => setHighlightedDoc(null), 1500);
               }}
             />
-            <Checklist client={client} collapsed={true} />
             <FileInfo client={client} />
 
             {/* Staged flags */}

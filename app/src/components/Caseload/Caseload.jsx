@@ -108,20 +108,8 @@ export default function Caseload({ readOnly, cmName }) {
         <div className="caseload__readonly-banner">Viewing {cmName}'s caseload — Read only</div>
       )}
 
-      {/* Portfolio Summary Bar */}
-      <div className="caseload__portfolio">
-        {totalBar.map(item => (
-          <button
-            key={item.key}
-            className={`caseload__portfolio-item ${filter === item.key ? 'active' : ''}`}
-            onClick={() => setFilter(filter === item.key ? 'all' : item.key)}
-          >
-            <span className="caseload__portfolio-swatch" style={{ background: item.color, width: `${Math.max(12, Math.round(item.pct * 0.6))}px` }} />
-            <span className="caseload__portfolio-label">{item.label}</span>
-            <span className="caseload__portfolio-count">{item.count}</span>
-          </button>
-        ))}
-      </div>
+
+
 
       {/* Filters + Search */}
       <div className="caseload__toolbar">

@@ -30,7 +30,7 @@ export default function Shell({ children }) {
   const [roleDropdown, setRoleDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const currentUser = ROLES.find(r => r.id === state.currentRole);
+  const currentUser = ROLES.find(r => r.id === state.currentRole) || ROLES[0];
   const tabs = NAV_TABS[state.currentRole] || NAV_TABS.victoria;
 
   useEffect(() => {
